@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario</title>
+    <link rel="shortcut icon" href="./Images/tiburon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./CSS/estilos.css">
+    <link rel="stylesheet" href="./CSS/normalize.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('./Images/Umi.jpg') no-repeat center center/cover;
+        }
+        .cuestionario-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+        }
+        .cuestionario-container h1 {
+            margin-bottom: 20px;
+        }
+        .cuestionario-container div {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .cuestionario-container button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #28a745;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .cuestionario-container button:hover {
+            background: #218838;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="cuestionario-container">
+        <h1>Cuestionario sobre Tiburones</h1>
+        <form id="quiz-form">
+            <div>
+                <p>1. ¿Cuántas especies de tiburones existen aproximadamente?</p>
+                <input type="radio" name="q1" value="400" required> 400<br>
+                <input type="radio" name="q1" value="500"> 500<br>
+                <input type="radio" name="q1" value="600"> 600
+            </div>
+
+            <div>
+                <p>2. ¿Qué tiburón puede vivir hasta 400 años?</p>
+                <input type="radio" name="q2" value="Blanco" required> Gran Tiburón Blanco<br>
+                <input type="radio" name="q2" value="Groenlandia"> Tiburón de Groenlandia<br>
+                <input type="radio" name="q2" value="Toro"> Tiburón Toro
+            </div>
+
+            <div>
+                <p>3. ¿Cuál de estos tiburones es uno de los mas rapidos?</p>
+                <input type="radio" name="q3" value="Martillo" required> Tiburón Martillo<br>
+                <input type="radio" name="q3" value="Marrajo"> Tiburón Marrajo<br>
+                <input type="radio" name="q3" value="Toro"> Tiburón Toro
+            </div>
+
+            <div>
+                <p>4. ¿Qué tiburón puede vivir tanto en agua dulce como salada?</p>
+                <input type="radio" name="q4" value="Blanco" required> Gran Tiburón Blanco<br>
+                <input type="radio" name="q4" value="Toro"> Tiburón Toro<br>
+                <input type="radio" name="q4" value="Marrajo"> Tiburón Marrajo
+            </div>
+
+            <div>
+                <p>5. ¿Cómo se comunican los tiburones?</p>
+                <input type="radio" name="q5" value="Sonidos" required> A través de sonidos<br>
+                <input type="radio" name="q5" value="Lenguaje corporal"> Lenguaje corporal<br>
+                <input type="radio" name="q5" value="Colores"> Cambiando de colores
+            </div>
+
+            <button type="submit">Enviar</button>
+        </form>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        const quizForm = document.getElementById('quiz-form');
+        const result = document.getElementById('result');
+
+        quizForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const answers = {
+                q1: '500',
+                q2: 'Groenlandia',
+                q3: 'Marrajo',
+                q4: 'Toro',
+                q5: 'Lenguaje corporal'
+            };
+
+            let score = 0;
+            const formData = new FormData(quizForm);
+
+            for (let [question, answer] of Object.entries(answers)) {
+                if (formData.get(question) === answer) {
+                    score++;
+                }
+            }
+
+            result.textContent = `Puntaje: ${score} de 5`;
+        });
+    </script>
+</body>
+</html>
